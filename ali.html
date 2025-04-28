@@ -1,218 +1,838 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="en">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name=" " content=" ">
-    <title> حلقة الامام علي كرم الله وجهه </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="نظام إدارة طلاب حلقة الإمام علي في مركز النور">
+    <title>حلقة الإمام علي - طلاب الحلقة</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #9b59b6;
+            --text-color: #333;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .search-box {
+            position: relative;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            padding-right: 45px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        select, .print-btn {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .print-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .print-btn:hover {
+            background-color: #8e44ad;
+        }
+        
+        .students-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .students-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: right;
+            font-weight: 500;
+        }
+        
+        .students-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .students-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .students-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .student-name {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .student-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        .student-link:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            transform: translateX(-3px);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--accent-color), var(--secondary-color));
+            border-radius: 5px;
+        }
+        
+        .rating {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .badge-excellent {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #27ae60;
+        }
+        
+        .badge-very-good {
+            background-color: rgba(52, 152, 219, 0.2);
+            color: #2980b9;
+        }
+        
+        .badge-good {
+            background-color: rgba(241, 196, 15, 0.2);
+            color: #f39c12;
+        }
+        
+        .badge-basic {
+            background-color: rgba(230, 126, 34, 0.2);
+            color: #e67e22;
+        }
+        
+        .badge-beginner {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .action-btn i {
+            font-size: 0.9rem;
+        }
+        
+        .view-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .view-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .print-btn-sm {
+            background-color: #7f8c8d;
+            color: white;
+        }
+        
+        .print-btn-sm:hover {
+            background-color: #6c7a7d;
+        }
+        
+        .back-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .back-link {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .back-link-circles {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .back-link-circles:hover {
+            background-color: #1a252f;
+        }
+        
+        .back-link-home {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .back-link-home:hover {
+            background-color: #8e44ad;
+        }
+        
+        @media print {
+            .no-print {
+                display: none;
+            }
+            
+            body {
+                background-color: white;
+                font-size: 12pt;
+            }
+            
+            .container {
+                padding: 0;
+                max-width: 100%;
+            }
+            
+            .students-table {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            .students-table th {
+                background-color: #f1f1f1 !important;
+                color: black !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            .students-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <table border="10" style="width: 900px; background-color: rgba(96, 97, 100, 0.267);">
-            <caption style="color: rgb(9, 197, 103);">  <h3>معلومات طلاب حلقة الفاروق</h3></caption>
-
+    <div class="container">
+        <header>
+            <h1>طلاب حلقة الإمام علي (عليه السلام)</h1>
+            <p>نظام متكامل لمتابعة طلاب الحلقة وتقييم مستوياتهم</p>
+        </header>
+        
+        <div class="controls no-print">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="ابحث عن طالب...">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="filter-group">
+                <select id="levelFilter">
+                    <option value="all">جميع المستويات</option>
+                    <option value="very-good">جيد جداً</option>
+                    <option value="good">جيد</option>
+                    <option value="basic">لا بأس</option>
+                    <option value="beginner">مبتدئ</option>
+                </select>
+                
+                <select id="progressFilter">
+                    <option value="all">جميع المراحل</option>
+                    <option value="half">نصف جزء</option>
+                    <option value="quarter">ربع جزء</option>
+                    <option value="beginner">مبتدئ</option>
+                </select>
+                
+                <button class="print-btn" id="printAllBtn">
+                    <i class="fas fa-print"></i> طباعة القائمة
+                </button>
+            </div>
+        </div>
+        
+        <table class="students-table">
             <thead>
-                <tr style="color: rgb(26, 29, 175); background-color: rgb(180, 145, 212);">
-                    <th> الاسم </th>
-                    <th> مقدار الحفظ </th>
-                    <th> مستوى القراءة والكتابة </th>
+                <tr>
+                    <th width="5%">#</th>
+                    <th width="25%">اسم الطالب</th>
+                    <th width="20%">مقدار الحفظ</th>
+                    <th width="15%">التقدم</th>
+                    <th width="15%">مستوى القراءة والكتابة</th>
+                    <th width="20%" class="no-print">إجراءات</th>
                 </tr>
             </thead>
-
-            <tbody>
+            <tbody id="studentsTableBody">
                 <tr>
+                    <td>1</td>
+                    <td class="student-name">عصوم مروان علي ناجي</td>
+                    <td>نصف جزء</td>
                     <td>
-                        <ol start="1">
-                            <li>
-                                عصوم مروان علي ناجي
-                            </li>
-        
-                        </ol>
-                
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 5%"></div>
+                        </div>
+                        <small>5% من الحفظ</small>
                     </td>
-                    <td>نصف جزء </td>
-                    <td> جيد جدا  </td>
-                </tr>
-
-        
-                <tr>
                     <td>
-                        <ol start="2">
-                            <li>
-                            عبد الرحمن علي الزهيري 
-                            </li>
-        
-                        </ol>
-                        
+                        <span class="badge badge-very-good">جيد جداً</span>
+                        <div class="rating">★★★★☆</div>
                     </td>
-                    <td>نصف جزء </td>
-                    <td>  جيد </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(1)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
                 </tr>
-
                 <tr>
+                    <td>2</td>
+                    <td class="student-name">عبد الرحمن علي الزهيري</td>
+                    <td>نصف جزء</td>
                     <td>
-                        <ol start="3">
-                            <li>
-                            يحيى ابراهيم علي عماد المهلل
-                            </li>
-        
-                        </ol>
-                
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 5%"></div>
+                        </div>
+                        <small>5% من الحفظ</small>
                     </td>
-                    <td>نصف جزء </td>
-                    <td> جيد  </td>
-                </tr>
-
-            
-                <tr>
                     <td>
-                        <ol start="4">
-                            <li>
-                            صالح احمد صالح 
-                            </li>
-        
-                        </ol>
-                
+                        <span class="badge badge-good">جيد</span>
+                        <div class="rating">★★★☆☆</div>
                     </td>
-                    <td>نصف جزء </td>
-                    <td> جيد  </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(2)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
                 </tr>
-                
-                
                 <tr>
+                    <td>3</td>
+                    <td class="student-name">يحيى إبراهيم علي عماد المهلل</td>
+                    <td>نصف جزء</td>
                     <td>
-                        <ol start="5">
-                            <li>
-                            خالد محمد عبده عضلات
-                            </li>
-        
-                        </ol>
-                    
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 5%"></div>
+                        </div>
+                        <small>5% من الحفظ</small>
                     </td>
-                    <td>نصف جزء </td>
-                    <td>  جيد  </td>
-                </tr>
-
-                
-                
-                <tr>
                     <td>
-                        <ol start="6">
-                            <li>
-                            محمد صلاح ثابت عبده ناصر
-                            </li>
-        
-                        </ol>
-                    
+                        <span class="badge badge-good">جيد</span>
+                        <div class="rating">★★★☆☆</div>
                     </td>
-                    <td>ربع جزء </td>
-                    <td>  جيد  </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(3)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
                 </tr>
-
-
                 <tr>
+                    <td>4</td>
+                    <td class="student-name">صالح أحمد صالح</td>
+                    <td>نصف جزء</td>
                     <td>
-                    <ol start="7">
-                        <li>شاكر محمد صالح النجار</li>
-
-                    </ol>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 5%"></div>
+                        </div>
+                        <small>5% من الحفظ</small>
                     </td>
-                    <td>نصف جزء </td>
-                    <td> لا باس </td>
-                </tr>
-
-                
-                <tr>
                     <td>
-                        <ol start="8">
-                            <li>
-                            حلمي محمد عبده عضلات
-                            </li>
-        
-                        </ol>
-                    
+                        <span class="badge badge-good">جيد</span>
+                        <div class="rating">★★★☆☆</div>
                     </td>
-                    <td>ربع جزء </td>
-                    <td>  لا باس </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(4)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
                 </tr>
-
-
                 <tr>
+                    <td>5</td>
+                    <td class="student-name">خالد محمد عبده عضلات</td>
+                    <td>نصف جزء</td>
                     <td>
-                        <ol start="9">
-                            <li>
-                            محمد مروان علي ناجي
-                            </li>
-        
-                        </ol>
-                
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 5%"></div>
+                        </div>
+                        <small>5% من الحفظ</small>
                     </td>
-                    <td> مبتدئ </td>
-                    <td> مبتدئ  </td>
-                </tr>
-
-                <tr>
                     <td>
-                        <ol start="10">
-                            <li>
-                                محمد احمد صالح 
-                            </li>
-        
-                        </ol>
-                
+                        <span class="badge badge-good">جيد</span>
+                        <div class="rating">★★★☆☆</div>
                     </td>
-                    <td>مبتدئ  </td>
-                    <td> مبتدئ  </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(5)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
                 </tr>
-
                 <tr>
+                    <td>6</td>
+                    <td class="student-name">محمد صلاح ثابت عبده ناصر</td>
+                    <td>ربع جزء</td>
                     <td>
-                        <ol start="11">
-                            <li>
-                                عمار خالد نعمان الزهيري
-                            </li>
-        
-                        </ol>
-                    
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 2.5%"></div>
+                        </div>
+                        <small>2.5% من الحفظ</small>
                     </td>
-                    <td> مبتدئ </td>
-                    <td>  مبتدئ </td>
-                </tr>
-
-                <tr>
                     <td>
-                        <ol start="12">
-                            <li>
-                            جبير يوسف احمد الزهيري
-                            </li>
-        
-                        </ol>
-                    
+                        <span class="badge badge-good">جيد</span>
+                        <div class="rating">★★★☆☆</div>
                     </td>
-                    <td> مبتدئ </td>
-                    <td> مبتدئ </td>
-                    
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(6)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
                 </tr>
-
                 <tr>
-                    <td> 
-                    <ol start="13">
-                        <li>
-                        عبد الرحمن محمد حسن فارع الزهيري
-                        </li>
-
-                    </ol>
+                    <td>7</td>
+                    <td class="student-name">شاكر محمد صالح النجار</td>
+                    <td>نصف جزء</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 5%"></div>
+                        </div>
+                        <small>5% من الحفظ</small>
                     </td>
-                    <td> مبتدئ </td>
-                    <td> مبتدئ  </td>
+                    <td>
+                        <span class="badge badge-basic">لا بأس</span>
+                        <div class="rating">★★☆☆☆</div>
+                    </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(7)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                   <tr>
+                    <td>8</td>
+                    <td class="student-name">حلمي محمد عبده عضلات</td>
+                    <td>ربع جزء</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 2.5%"></div>
+                        </div>
+                        <small>2.5% من الحفظ</small>
+                    </td>
+                    <td>
+                        <span class="badge badge-basic">لا بأس</span>
+                        <div class="rating">★★☆☆☆</div>
+                    </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(8)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td class="student-name">محمد مروان علي ناجي</td>
+                    <td>مبتدئ</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 1%"></div>
+                        </div>
+                        <small>1% من الحفظ</small>
+                    </td>
+                    <td>
+                        <span class="badge badge-beginner">مبتدئ</span>
+                        <div class="rating">★☆☆☆☆</div>
+                    </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(9)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td class="student-name">محمد أحمد صالح</td>
+                    <td>مبتدئ</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 1%"></div>
+                        </div>
+                        <small>1% من الحفظ</small>
+                    </td>
+                    <td>
+                        <span class="badge badge-beginner">مبتدئ</span>
+                        <div class="rating">★☆☆☆☆</div>
+                    </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(10)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td class="student-name">عمار خالد نعمان الزهيري</td>
+                    <td>مبتدئ</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 1%"></div>
+                        </div>
+                        <small>1% من الحفظ</small>
+                    </td>
+                    <td>
+                        <span class="badge badge-beginner">مبتدئ</span>
+                        <div class="rating">★☆☆☆☆</div>
+                    </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(11)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td class="student-name">جبير يوسف أحمد الزهيري</td>
+                    <td>مبتدئ</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 1%"></div>
+                        </div>
+                        <small>1% من الحفظ</small>
+                    </td>
+                    <td>
+                        <span class="badge badge-beginner">مبتدئ</span>
+                        <div class="rating">★☆☆☆☆</div>
+                    </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(12)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td class="student-name">عبد الرحمن محمد حسن فارع الزهيري</td>
+                    <td>مبتدئ</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 1%"></div>
+                        </div>
+                        <small>1% من الحفظ</small>
+                    </td>
+                    <td>
+                        <span class="badge badge-beginner">مبتدئ</span>
+                        <div class="rating">★☆☆☆☆</div>
+                    </td>
+                    <td class="no-print">
+                        <div class="actions">
+                            <a href="#" class="action-btn view-btn">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <button class="action-btn print-btn-sm" onclick="printStudent(13)">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
-
         </table>
+        
+        <div class="back-buttons no-print">
+            <a href="hlkat.html.html" class="back-link back-link-circles">
+                <i class="fas fa-arrow-right"></i> العودة إلى صفحة الحلقات
+            </a>
+            <a href="info.html" class="back-link back-link-home">
+                <i class="fas fa-home"></i> العودة إلى الصفحة الرئيسية
+            </a>
+        </div>
     </div>
 
-    <div>
-        <h3 ><a style="color: darkgreen;" href="hlkat.html.html" target="_self" title="اذهب الى صفحة الحلقات  "> اضغط هنا للعودة  الى صفحة الحلقات   </a> </h3>
-        <h3 ><a style="color: rgb(160, 9, 9);" href="info.html" target="_self" title="اذهب الى الصفحة الرئيسية  "> اضغط هنا للعودة  الى الصفحة الرئيسية   </a> </h3>
-    </div>
+    <script>
+        // فلترة الطلاب حسب المستوى
+        document.getElementById('levelFilter').addEventListener('change', function() {
+            filterStudents();
+        });
+        
+        // فلترة الطلاب حسب مقدار الحفظ
+        document.getElementById('progressFilter').addEventListener('change', function() {
+            filterStudents();
+        });
+        
+        // بحث الطلاب
+        document.getElementById('searchInput').addEventListener('input', function() {
+            filterStudents();
+        });
+        
+        // طباعة القائمة الكاملة
+        document.getElementById('printAllBtn').addEventListener('click', function() {
+            window.print();
+        });
+        
+        // فلترة الطلاب
+        function filterStudents() {
+            const levelFilter = document.getElementById('levelFilter').value;
+            const progressFilter = document.getElementById('progressFilter').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#studentsTableBody tr');
+            
+            rows.forEach(row => {
+                const name = row.querySelector('.student-name').textContent.toLowerCase();
+                const level = row.querySelector('.badge').textContent;
+                const progressText = row.cells[2].textContent.toLowerCase();
+                
+                // تطبيق الفلاتر
+                const levelMatch = levelFilter === 'all' || 
+                                 (levelFilter === 'very-good' && level === 'جيد جداً') ||
+                                 (levelFilter === 'good' && level === 'جيد') ||
+                                 (levelFilter === 'basic' && level === 'لا بأس') ||
+                                 (levelFilter === 'beginner' && level === 'مبتدئ');
+                
+                const progressMatch = progressFilter === 'all' ||
+                                    (progressFilter === 'half' && progressText.includes('نصف')) ||
+                                    (progressFilter === 'quarter' && progressText.includes('ربع')) ||
+                                    (progressFilter === 'beginner' && progressText.includes('مبتدئ'));
+                
+                const searchMatch = name.includes(searchTerm);
+                
+                if (levelMatch && progressMatch && searchMatch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        
+        // طباعة بيانات طالب معين
+        function printStudent(studentId) {
+            const originalContents = document.body.innerHTML;
+            const studentRow = document.querySelector(`#studentsTableBody tr:nth-child(${studentId})`);
+            
+            if (studentRow) {
+                const printContents = `
+                    <div style="text-align:center;padding:20px;font-family:Tajawal">
+                        <h1 style="color:#2c3e50">بيانات الطالب</h1>
+                        <table border="1" style="width:100%;border-collapse:collapse;margin:20px 0">
+                            <tr>
+                                <th style="padding:10px;background:#f1f1f1">المعلومات</th>
+                                <th style="padding:10px;background:#f1f1f1">التفاصيل</th>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px">الاسم</td>
+                                <td style="padding:10px">${studentRow.cells[1].textContent}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px">مقدار الحفظ</td>
+                                <td style="padding:10px">${studentRow.cells[2].textContent}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px">مستوى القراءة والكتابة</td>
+                                <td style="padding:10px">${studentRow.cells[4].textContent}</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top:30px">تاريخ الطباعة: ${new Date().toLocaleDateString()}</p>
+                    </div>
+                `;
+                
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+            }
+        }
+        
+        // فلترة أولية عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            filterStudents();
+        });
+    </script>
 </body>
 </html>

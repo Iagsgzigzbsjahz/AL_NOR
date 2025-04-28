@@ -1,37 +1,162 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
-
 <head>
   <meta charset="utf-8">
-  <title> صفحة الترحيب </title>
-  <meta name="keywords"
-    content=" الموقع الرسمي لمركز النور لتعليم القران الكريم وعلومه وتعلم القراءة والكتابة في اليمن محافظة اب مديرية بعدان , موقع-مركز-النور-بالرباعي , مركز النور رواية السيف الناري , مركز النور امجد المهلل">
+  <title>مركز النور - صفحة الترحيب</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="الموقع الرسمي لمركز النور لتعليم القران الكريم وعلومه وتعلم القراءة والكتابة في اليمن محافظة اب مديرية بعدان, موقع-مركز-النور-بالرباعي, مركز النور رواية السيف الناري, مركز النور امجد المهلل">
+  <meta name="google-site-verification" content="cZv1-QX-5RU7oO_upHDVQQD_zs9FdRnPc6Q2BwhNWJU">
   <style>
-    .right- image {
-      float: right;
-      margin: 1000 px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    
+    .container {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      width: 90%;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      line-height: 1.4;
+    }
+    
+    .logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #eaeaea;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: #3498db;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+    }
+    
+    .btn:hover {
+      background-color: #2980b9;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+    }
+    
+    .btn:disabled {
+      background-color: #95a5a6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .countdown {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      color: #7f8c8d;
+    }
+    
+    .loading-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 5px;
+      background-color: #3498db;
+      width: 100%;
+      animation: loading 5s linear forwards;
+    }
+    
+    @keyframes loading {
+      from { width: 0% }
+      to { width: 100% }
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+      
+      .logo {
+        width: 120px;
+        height: 120px;
+      }
     }
   </style>
-
 </head>
 
-<meta name="google-site-verification"
-  content="cZv1-QX-5RU7oO_upHDVQQD_zs9FdRnPc6Q2BwhNWJU" />
-
 <body>
-  <!--ملاحظات وشرح للاكواد-->
-  <h1>
-    اهلا بكم في الموقع الرسمي لمركز النور لتعليم القرآن الكريم وعلومه
-  </h1>
-  <!--- <video src="bb.mp4" controls height="300" muted loop class="right - video" poster="alnor.jpg"></video> -->
-  <img src="alnor.jpg" alt="" class="right-image" width="250">
-  <h3> <a href="info.html" target="_blank" title="اذهب الى الصفحة الرئيسية">
-      الصفحة الرئيسية </a> </h3>
+  <div class="container">
+    <div class="loading-bar"></div>
+    <img src="alnor.jpg" alt="مركز النور" class="logo">
+    <h1>مرحباً بكم في الموقع الرسمي لمركز النور لتعليم القرآن الكريم وعلومه</h1>
+    <div class="countdown">سيتم تحويلك تلقائياً خلال <span id="timer">5</span> ثانية</div>
+    <a href="info.html" class="btn" id="redirectBtn" disabled>انتقال إلى الصفحة الرئيسية</a>
+  </div>
 
-
-
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const timerElement = document.getElementById('timer');
+      const redirectBtn = document.getElementById('redirectBtn');
+      let seconds = 5;
+      
+      // تحديث العداد كل ثانية
+      const countdown = setInterval(function() {
+        seconds--;
+        timerElement.textContent = seconds;
+        
+        if (seconds <= 0) {
+          clearInterval(countdown);
+          redirectBtn.removeAttribute('disabled');
+          redirectBtn.textContent = "انقر للانتقال الآن";
+        }
+      }, 1000);
+      
+      // التحويل التلقائي بعد 5 ثوان
+      setTimeout(function() {
+        window.location.href = "info.html";
+      }, 5000);
+      
+      // السماح بالانتقال يدوياً بعد انتهاء الوقت
+      redirectBtn.addEventListener('click', function() {
+        if (seconds <= 0) {
+          window.location.href = "info.html";
+        }
+      });
+    });
+  </script>
 </body>
-
-
-
 </html>

@@ -1,24 +1,287 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="en">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name=" " content=" ">
-    <title> الخواطر </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="خواطر إيمانية وتربوية من مركز النور لتعليم القرآن الكريم">
+    <title>مركز النور - الخواطر</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.7;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        
+        .category-btn {
+            background-color: #eaeaea;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .khatera {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-right: 4px solid #3498db;
+        }
+        
+        .khatera-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .khatera-title {
+            color: #2c3e50;
+            font-size: 1.4rem;
+        }
+        
+        .khatera-author {
+            color: #e67e22;
+            font-weight: bold;
+        }
+        
+        .khatera-date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .khatera-content {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .media-container {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        video, audio {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-download {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .btn-download:hover {
+            background-color: #219955;
+        }
+        
+        .btn-back {
+            background-color: #e74c3c;
+            color: white;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        .btn-back:hover {
+            background-color: #c0392b;
+        }
+        
+        .add-khatera {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .add-khatera:hover {
+            background-color: #2980b9;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .khatera-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div>
-        <h1 style="color: brown;"> <ul>
-            <li>خواطر رمضانية
-            </li>
-        </ul>
-     </h1>
-        <ul>
-            <li> <h3> خاطرة بعنوان - <span style="color: blue;">  آفات اللسان </span> - القاء الطالب - <span style="color: rgb(212, 134, 38);">'عبدالله جميل العودي' </span>
-            </h3>
-            </li>
-        </ul    >
-            <video src="bb.mp4" controls height="300" muted loop class="right - video" poster="alnor.jpg"></video>
+    <div class="container">
+        <header>
+            <h1>خواطر إيمانية</h1>
+            <p>كلمات تنير القلوب وتزكي النفوس</p>
+        </header>
+        
+        <div class="categories">
+            <button class="category-btn active">الكل</button>
+            <button class="category-btn">رمضانية</button>
+            <button class="category-btn">قرآنية</button>
+            <button class="category-btn">تربوية</button>
+            <button class="category-btn">اجتماعية</button>
+        </div>
+        
+        <a href="add-khatera.html" class="add-khatera">
+            <i class="fas fa-plus"></i> إضافة خاطرة جديدة
+        </a>
+        
+        <!-- مثال على خاطرة -->
+        <div class="khatera" data-category="رمضانية">
+            <div class="khatera-header">
+                <h2 class="khatera-title">آفات اللسان</h2>
+                <div>
+                    <span class="khatera-author">عبدالله جميل العودي</span>
+                    <span class="khatera-date"> | 15 رمضان 1444</span>
+                </div>
+            </div>
+            
+            <div class="khatera-content">
+                <p>اللسان نعمة عظيمة من نعم الله تعالى، لكنه قد يكون سبباً في هلاك صاحبه إذا لم يحسن استخدامه. 
+                قال رسول الله صلى الله عليه وسلم: "من كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت". 
+                في هذا الزمان كثرت آفات اللسان من غيبة ونميمة وكذب وسب وشتم، وما يزال العبد يتكلم بالكلمة 
+                من سخط الله لا يلقي لها بالاً يهوي بها في النار أبعد مما بين المشرق والمغرب.</p>
+                
+                <p>فاحذر أخي المسلم من آفات اللسان، واحرص على أن يكون لسانك رطباً بذكر الله، 
+                معتاداً للخير، بعيداً عن الشر. واعلم أن حفظ اللسان من أعظم أسباب النجاة يوم القيامة.</p>
+            </div>
+            
+            <div class="media-container">
+                <video src="bb.mp4" controls poster="alnor.jpg"></video>
+                <audio controls>
+                    <source src="khatera-audio.mp3" type="audio/mpeg">
+                    المتصفح لا يدعم تشغيل الصوتيات
+                </audio>
+            </div>
+            
+            <div class="actions">
+                <a href="khatera.pdf" download class="btn btn-download">
+                    <i class="fas fa-download"></i> تحميل PDF
+                </a>
+                <a href="#" class="btn">
+                    <i class="fas fa-share"></i> مشاركة
+                </a>
+                <a href="#" class="btn">
+                    <i class="fas fa-print"></i> طباعة
+                </a>
+            </div>
+        </div>
+        
+        <!-- يمكن إضافة المزيد من الخواطر هنا -->
+        
+        <a href="info.html" class="btn btn-back">
+            <i class="fas fa-arrow-right"></i> العودة إلى الصفحة الرئيسية
+        </a>
     </div>
-    <h3 ><a style="color: rgb(160, 9, 9);" href="info.html" target="_self" title="اذهب الى الصفحة الرئيسية  "> انقر للعودة  الى الصفحة الرئيسية   </a> </h3>
+
+    <script>
+        // فلترة الخواطر حسب التصنيف
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // إزالة التنشيط من جميع الأزرار
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    // تنشيط الزر المحدد
+                    this.classList.add('active');
+                    
+                    const category = this.textContent;
+                    const allKhatera = document.querySelectorAll('.khatera');
+                    
+                    if (category === 'الكل') {
+                        allKhatera.forEach(k => k.style.display = 'block');
+                    } else {
+                        allKhatera.forEach(k => {
+                            if (k.dataset.category === category) {
+                                k.style.display = 'block';
+                            } else {
+                                k.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
-</html> 
+</html>

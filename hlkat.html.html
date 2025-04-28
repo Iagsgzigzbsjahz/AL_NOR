@@ -1,24 +1,471 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="en">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name=" " content=" ">
-    <title> الحلقات </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="حلقات تحفيظ القرآن الكريم في مركز النور">
+    <title>مركز النور - حلقات التحفيظ</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e67e22;
+            --text-color: #333;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: url('islamic-pattern.png');
+            background-blend-mode: overlay;
+            background-size: 300px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding: 30px 0;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+            border-radius: 3px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::before, h1::after {
+            content: '✿';
+            color: var(--accent-color);
+            margin: 0 15px;
+            font-size: 1.5rem;
+        }
+        
+        .search-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-box {
+            position: relative;
+            width: 300px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            padding-right: 45px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-color: var(--secondary-color);
+        }
+        
+        .circles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .circle-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            text-align: center;
+        }
+        
+        .circle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .circle-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .circle-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .circle-card:hover .circle-image img {
+            transform: scale(1.1);
+        }
+        
+        .circle-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 20px;
+            color: var(--white);
+        }
+        
+        .circle-title {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--white);
+        }
+        
+        .circle-content {
+            padding: 20px;
+        }
+        
+        .circle-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+            color: #7f8c8d;
+        }
+        
+        .circle-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .circle-stat i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .circle-link {
+            display: inline-block;
+            background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .circle-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .circle-link:hover::before {
+            left: 100%;
+        }
+        
+        .circle-link:hover {
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .back-btn:hover {
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .circles-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .circle-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <h1> حلقة الفاروق  
-            <h2> <a href="farok.html.html" target="_self" title=" صفحة حلقة الفاروق  "> انقر للذهاب الى صفحة حلقة الفاروق   </a> <br></h2>
-
-        </h1>
-        <br>
-        <h1> حلقة الامام علي 
-            <h2> <a href="ali.html" target="_self" title=" صفحة حلقة الامام علي  "> انقر للذهاب الى صفحة حلقة الامام علي   </a> <br></h2>
-        </h1> <br>
-        <h1> حلقة ابو بكر الصديق 
-            <h2> <a href="ابو_بكر.html" target="_self" title=" صفحة حلقة الصديق  "> انقر للذهاب الى صفحة حلقة ابو بكر الصديق   </a> <br></h2>
-        </h1> <br>
-
+    <div class="container">
+        <header>
+            <h1>حلقات التحفيظ</h1>
+            <p>اختر حلقتك وانضم إلى رحلة حفظ القرآن الكريم</p>
+        </header>
+        
+        <div class="search-filter">
+            <div class="search-box">
+                <input type="text" placeholder="ابحث عن حلقة...">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active">الكل</button>
+                <button class="filter-btn">الصباحية</button>
+                <button class="filter-btn">المسائية</button>
+                <button class="filter-btn">المتقدمة</button>
+                <button class="filter-btn">للمبتدئين</button>
+            </div>
+        </div>
+        
+        <div class="circles-container">
+            <!-- حلقة الفاروق -->
+            <div class="circle-card">
+                <div class="circle-image">
+                    <img src="farouk-image.jpg" alt="حلقة الفاروق">
+                    <div class="circle-overlay">
+                        <h2 class="circle-title">حلقة الفاروق</h2>
+                    </div>
+                </div>
+                <div class="circle-content">
+                    <p>حلقة متقدمة لختم القرآن الكريم مع دراسة التفسير والأحكام</p>
+                    
+                    <div class="circle-stats">
+                        <div class="circle-stat">
+                            <i class="fas fa-users"></i>
+                            <span>15 طالب</span>
+                        </div>
+                        <div class="circle-stat">
+                            <i class="fas fa-clock"></i>
+                            <span>مسائية</span>
+                        </div>
+                        <div class="circle-stat">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                    
+                    <a href="farok.html.html" class="circle-link">
+                        <i class="fas fa-door-open"></i> دخول الحلقة
+                    </a>
+                </div>
+            </div>
+            
+            <!-- حلقة الإمام علي -->
+            <div class="circle-card">
+                <div class="circle-image">
+                    <img src="ali-image.jpg" alt="حلقة الإمام علي">
+                    <div class="circle-overlay">
+                        <h2 class="circle-title">حلقة الإمام علي</h2>
+                    </div>
+                </div>
+                <div class="circle-content">
+                    <p> حلقة للمبتدئين في حفظ القران الكريم وتعلم القراءة والكتابة</p>
+                    
+                    <div class="circle-stats">
+                        <div class="circle-stat">
+                            <i class="fas fa-users"></i>
+                            <span>18 طالب</span>
+                        </div>
+                        <div class="circle-stat">
+                            <i class="fas fa-clock"></i>
+                            <span>مسائية</span>
+                        </div>
+                        <div class="circle-stat">
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span>
+                        </div>
+                    </div>
+                    
+                    <a href="ali.html" class="circle-link">
+                        <i class="fas fa-door-open"></i> دخول الحلقة
+                    </a>
+                </div>
+            </div>
+            
+            <!-- حلقة أبو بكر الصديق -->
+            <div class="circle-card">
+                <div class="circle-image">
+                    <img src="abubakr-image.jpg" alt="حلقة أبو بكر الصديق">
+                    <div class="circle-overlay">
+                        <h2 class="circle-title">حلقة أبو بكر الصديق</h2>
+                    </div>
+                </div>
+                <div class="circle-content">
+                    <p>حلقة للمبتدئين في حفظ القرآن الكريم مع تعلم أحكام التجويد</p>
+                    
+                    <div class="circle-stats">
+                        <div class="circle-stat">
+                            <i class="fas fa-users"></i>
+                            <span>12 طالب</span>
+                        </div>
+                        <div class="circle-stat">
+                            <i class="fas fa-clock"></i>
+                            <span>مسائية</span>
+                        </div>
+                        <div class="circle-stat">
+                            <i class="fas fa-star"></i>
+                            <span>4.7</span>
+                        </div>
+                    </div>
+                    
+                    <a href="ابو_بكر.html" class="circle-link">
+                        <i class="fas fa-door-open"></i> دخول الحلقة
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <a href="info.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i> العودة إلى الصفحة الرئيسية
+        </a>
     </div>
+
+    <script>
+        // فلترة الحلقات حسب النوع
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const searchInput = document.querySelector('.search-box input');
+            const circleCards = document.querySelectorAll('.circle-card');
+            
+            // فلترة حسب النوع
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // إزالة التنشيط من جميع الأزرار
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // تنشيط الزر المحدد
+                    this.classList.add('active');
+                    
+                    const filter = this.textContent;
+                    
+                    circleCards.forEach(card => {
+                        if (filter === 'الكل') {
+                            card.style.display = 'block';
+                        } else {
+                            // يمكن إضافة منطق الفلترة حسب النوع هنا
+                            card.style.display = 'block';
+                        }
+                    });
+                });
+            });
+            
+            // بحث الحلقات
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                circleCards.forEach(card => {
+                    const title = card.querySelector('.circle-title').textContent.toLowerCase();
+                    const description = card.querySelector('.circle-content p').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // تأثيرات عند التمرير
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            circleCards.forEach((card, index) => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>

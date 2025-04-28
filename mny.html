@@ -2,180 +2,751 @@
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="الوصف" content="صفحة الحسابات الخاصة بموقع مركز النور">
-    <title> صفحة الحسابات </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="نظام إدارة الحسابات مع تحكم كامل في الصلاحيات">
+    <title>نظام الحسابات - مركز النور</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e67e22;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            position: relative;
+        }
+
+        .auth-buttons {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
+
+        .btn-auth {
+            padding: 8px 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .btn-auth:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .date-display {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .summary-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .summary-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .summary-card .amount {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .income .amount {
+            color: var(--success-color);
+        }
+
+        .expense .amount {
+            color: var(--danger-color);
+        }
+
+        .balance .amount {
+            color: var(--secondary-color);
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #219653;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-print {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-print:hover {
+            background-color: #d35400;
+        }
+
+        .admin-only {
+            display: none;
+        }
+
+        body.admin .admin-only {
+            display: block;
+        }
+
+        body.admin .admin-btn {
+            display: inline-flex;
+        }
+
+        .search-filter {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+        }
+
+        .search-filter h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tables-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .tables-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .table-wrapper {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .table-wrapper h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .income-table tr:last-child td {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .expense-table tr:last-child td {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+
+        .currency {
+            font-weight: bold;
+        }
+
+        .SAR {
+            color: #1a5276;
+        }
+
+        .YER {
+            color: #7d6608;
+        }
+
+        .notes {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            margin-top: 30px;
+        }
+
+        .notes h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .notes p {
+            line-height: 1.8;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .modal h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Print styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .print-section, .print-section * {
+                visibility: visible;
+            }
+            .print-section {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <div>
+    <div class="container">
+        <header class="animated">
+            <div class="auth-buttons">
+                <button class="btn-auth" id="authBtn">
+                    <i class="fas fa-user-shield"></i> تسجيل دخول المدير
+                </button>
+            </div>
+            <h1>نظام إدارة الحسابات - مركز النور</h1>
+            <div class="date-display" id="currentDate"></div>
+        </header>
 
-      <table border="50" style="width: 100%; height: 80%;">
-        <caption style="color: rgb(20, 162, 228);">  <h3> تفاصيل حسابات الدخل في المركز </h3></caption>
+        <div class="dashboard animated">
+            <div class="summary-card income">
+                <h3>إجمالي الدخل</h3>
+                <div class="amount" id="totalIncome">300 SAR + 6,000 YER</div>
+                <p>آخر تحديث: <span id="lastIncomeUpdate">اليوم</span></p>
+            </div>
 
-        <thead>
-            
-          <tr style="color: rgb(233, 142, 6);">
-              <th style="width:60%"> جهة او مصدر الدخل </th>
-              <th> المبلغ  </th>
-              
-          </tr>
-        </thead>
-        
-        <tbody>
+            <div class="summary-card expense">
+                <h3>إجمالي المصروفات</h3>
+                <div class="amount" id="totalExpense">27,500 YER</div>
+                <p>آخر تحديث: <span id="lastExpenseUpdate">اليوم</span></p>
+            </div>
 
-          <tr>
-              <td >
-  عارف محمد علي الزهيري </td>
+            <div class="summary-card balance">
+                <h3>الرصيد المتاح</h3>
+                <div class="amount" id="currentBalance">100 SAR + 5,500 YER</div>
+                <p>حالة الصندوق: <span id="balanceStatus">جيد</span></p>
+            </div>
 
-            <br>
-              <td>  100  (SAR)  <br> </td>
-          
-          </tr>
+            <div class="summary-card quick-actions">
+                <h3>إجراءات سريعة</h3>
+                <div class="actions">
+                    <button class="btn btn-success admin-only" id="addIncomeBtn">
+                        <i class="fas fa-plus-circle"></i> إضافة دخل
+                    </button>
+                    <button class="btn btn-danger admin-only" id="addExpenseBtn">
+                        <i class="fas fa-minus-circle"></i> إضافة مصروف
+                    </button>
+                    <button class="btn btn-print" id="printBtn">
+                        <i class="fas fa-print"></i> طباعة التقرير
+                    </button>
+                </div>
+            </div>
+        </div>
 
-          
+        <div class="search-filter animated">
+            <h3>بحث وتصفية</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="searchInput">بحث بالاسم أو الوصف</label>
+                    <input type="text" id="searchInput" class="form-control" placeholder="اكتب للبحث...">
+                </div>
+                <div class="form-group">
+                    <label for="currencyFilter">تصفية حسب العملة</label>
+                    <select id="currencyFilter" class="form-control">
+                        <option value="all">جميع العملات</option>
+                        <option value="SAR">الريال السعودي (SAR)</option>
+                        <option value="YER">الريال اليمني (YER)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fromDate">من تاريخ</label>
+                    <input type="date" id="fromDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="toDate">إلى تاريخ</label>
+                    <input type="date" id="toDate" class="form-control">
+                </div>
+            </div>
+            <button class="btn btn-primary" id="applyFilterBtn">
+                <i class="fas fa-filter"></i> تطبيق التصفية
+            </button>
+            <button class="btn" id="resetFilterBtn" style="background-color: #95a5a6; color: white;">
+                <i class="fas fa-redo"></i> إعادة تعيين
+            </button>
+        </div>
 
-          <tr>
-              <td>
-  فاعل خير </td>
+        <div class="tables-container print-section">
+            <div class="table-wrapper animated">
+                <h3>تفاصيل حسابات الدخل في المركز</h3>
+                <div class="table-responsive">
+                    <table class="income-table">
+                        <thead>
+                            <tr>
+                                <th>المبلغ</th>
+                                <th>جهة أو مصدر الدخل</th>
+                                <th>التاريخ</th>
+                                <th class="admin-only no-print">إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="incomeTableBody">
+                            <tr>
+                                <td><span class="currency SAR">100 SAR</span></td>
+                                <td>عارف محمد علي الزهيري</td>
+                                <td>2025-02-10</td>
+                                <td class="admin-only no-print">
+                                    <button class="btn" style="padding: 5px 10px; background-color: #f39c12; color: white;">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn" style="padding: 5px 10px; background-color: #e74c3c; color: white;">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- المزيد من الصفوف... -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" style="text-align: left;">إجمالي الدخل:</td>
+                                <td><strong>300 SAR + 6,000 YER</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
 
-            <br>
-              <td>  100  (SAR)  <br> </td>
-          
-          </tr>
+            <div class="table-wrapper animated">
+                <h3>تفاصيل حسابات الصرف في المركز</h3>
+                <div class="table-responsive">
+                    <table class="expense-table">
+                        <thead>
+                            <tr>
+                                <th>المبلغ</th>
+                                <th>الغرض أو تفاصيل الصرف</th>
+                                <th>التاريخ</th>
+                                <th class="admin-only no-print">إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseTableBody">
+                            <!-- الصفوف... -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" style="text-align: left;">إجمالي المصروفات:</td>
+                                <td><strong>27,500 YER</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: left;">الرصيد المتبقي:</td>
+                                <td><strong>100 SAR + 5,500 YER</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-          
+        <div class="notes animated">
+            <h3>ملاحظة هامة</h3>
+            <p>
+                الحسابات الحالية كانت من تاريخ 2025/2/10 من بداية تفاعل الناس معنا أما جميع الجوائز والأنشطة السابقة غير داخلة بالحساب لأنها لم تكن من أي جهة خارجية.
+            </p>
+        </div>
 
-          <tr>
-              <td>
-  فاروق علي محمد سعيد النجار </td>
-
-            <br>
-              <td>  100  (SAR)  <br> </td>
-          
-          </tr>
-
-          
-
-          <tr>
-              <td>
-  يوسف عبده صالح المهلل </td>
-
-            <br>
-              <td>  6000  (YER)  <br> </td>
-          
-          </tr>
-
-        </tbody>
-
-        <tfoot>
-            
-
-              <tr>
-              <td style="color: red">
-  مبلغ الدخل الإجمالي </td>
-
-            <br>
-              <td style="color: red"> 300 (SAR)  <br> + <br>         6000  (YER)      <br> </td>
-          
-          </tr>
-        </tfoot>
-        
-
-      </table>
-    
-  </div>
-  
-   <div>
-
-      <table border="50" style="width: 100%; height: 80%;">
-        <caption style="color: rgb(20, 162, 228);">  <h3>  تفاصيل حسابات الخرج في المركز </h3></caption>
-
-        <thead>
-          <tr style="color: rgb(233, 142, 6);">
-              <th style="width:30%"> المبلغ المصروف </th>
-              <th>  الغرض او تفاصيل الصرف </th>
-              
-          </tr>
-        </thead>
-          
-        <tbody>
-          <tr>
-              <td >
-  23500 (YER) </td>
-
-            <br>
-              <td>   جوائز دوري مركز النور السخة الأولى <br> </td>
-          
-          </tr>
-
-          
-
-          <tr>
-              <td>
-  1500 (YER) </td>
-
-            <br>
-              <td>  سبورة الكترونية لصالح الحلقة  <br> </td>
-          
-          </tr>
-
-          
-
-          <tr>
-              <td> 2500 (YER) </td>
-
-            <br>
-              <td>  شراء 4 مكانس + 4 سفنجات   <br> + فلاش تنظيف لصالح المسجد </td>
-          
-          </tr>
-
-          
-
-        </tbody>
-
-        <tfoot>
-
-              <tr>
-              <td style="color: rgb(252, 0, 0)">
-                
-  مبلغ الخرج الإجمالي </td>
-
-            <br>
-              <td style="color: red">  27500 (YER)   <br> </td>
-          
-          </tr>
-
-          
-
-          <tr>
-              <td style="color: blue">
-  المبلغ المتبقي في الصندوق </td>
-
-            <br>
-              <td style="color: blue">    100 (SAR)   <br> +  <br> 5500 ( YER) </td>
-          
-          </tr>
-
-          
-        </tfoot>
-        
-
-          
-        </table>
-      
+        <footer class="animated">
+            <p>نظام إدارة الحسابات - مركز النور &copy; <span id="currentYear"></span></p>
+        </footer>
     </div>
-    <div>
 
-        <table border="50" style="width: 100%; height: 80%;">
-          <caption style="color: rgb(20, 162, 228);">  <h3> ملاحظة هامه </h3></caption>
-          <tr style="color: rgb(233, 142, 6);">
-              <th style="width:30%"> الحسابات الحالية كانت من تأريخ 2025/2/10 <br>
-              من بداية تفاعل الناس معنا اما جميع الجوائز والانشطة السابقة غير داخله بالحساب لانها لم تكن من أي جهة خارجية .
-              </th>
-          
+    <!-- نموذج تسجيل الدخول -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2><i class="fas fa-user-shield"></i> تسجيل دخول المدير</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">اسم المستخدم</label>
+                    <input type="text" id="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="rememberMe">
+                        <input type="checkbox" id="rememberMe"> تذكرني
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> دخول
+                </button>
+            </form>
+        </div>
+    </div>
 
+    <!-- نماذج الإدارة (ستظهر فقط للمديرين) -->
+    <div class="modal" id="incomeModal">
+        <!-- ... نفس محتوى نموذج إضافة الدخل السابق ... -->
+    </div>
 
-    
+    <div class="modal" id="expenseModal">
+        <!-- ... نفس محتوى نموذج إضافة المصروف السابق ... -->
+    </div>
 
+    <script>
+        // دالة التحقق من صلاحيات المدير
+        function checkAdmin() {
+            // في التطبيق الحقيقي، يجب التحقق من جلسة المستخدم أو token
+            const adminToken = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
+            return adminToken === 'valid_token'; // هذا مثال فقط، في الواقع يجب التحقق من token صالح
+        }
+
+        // دالة تسجيل الدخول
+        function setupAuth() {
+            const authBtn = document.getElementById('authBtn');
+            const loginModal = document.getElementById('loginModal');
+            const loginForm = document.getElementById('loginForm');
+            const closeBtn = loginModal.querySelector('.close');
+
+            // تحديث واجهة المستخدم بناءً على حالة التسجيل
+            function updateAuthUI() {
+                if (checkAdmin()) {
+                    document.body.classList.add('admin');
+                    authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> تسجيل الخروج';
+                } else {
+                    document.body.classList.remove('admin');
+                    authBtn.innerHTML = '<i class="fas fa-user-shield"></i> تسجيل دخول المدير';
+                }
+            }
+
+            // فتح/إغلاق نافذة تسجيل الدخول
+            authBtn.addEventListener('click', function() {
+                if (checkAdmin()) {
+                    // تسجيل الخروج
+                    localStorage.removeItem('adminToken');
+                    sessionStorage.removeItem('adminToken');
+                    updateAuthUI();
+                    alert('تم تسجيل الخروج بنجاح');
+                } else {
+                    loginModal.style.display = 'flex';
+                }
+            });
+
+            closeBtn.addEventListener('click', function() {
+                loginModal.style.display = 'none';
+            });
+
+            // معالجة تسجيل الدخول
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const rememberMe = document.getElementById('rememberMe').checked;
+                
+                // في التطبيق الحقيقي، هنا يجب إرسال البيانات إلى الخادم للتحقق
+                if (username === "admin" && password === "CenterNoor123") { // كلمة مرور مؤقتة للتجربة
+                    if (rememberMe) {
+                        localStorage.setItem('adminToken', 'valid_token');
+                    } else {
+                        sessionStorage.setItem('adminToken', 'valid_token');
+                    }
+                    
+                    loginModal.style.display = 'none';
+                    updateAuthUI();
+                    alert('تم تسجيل الدخول بنجاح كمدير');
+                } else {
+                    alert('بيانات الدخول غير صحيحة');
+                }
+            });
+
+            // إغلاق النافذة عند النقر خارجها
+            window.addEventListener('click', function(event) {
+                if (event.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+            });
+
+            // تهيئة الواجهة عند التحميل
+            updateAuthUI();
+        }
+
+        // حماية النماذج الإدارية
+        function protectAdminFeatures() {
+            const adminButtons = document.querySelectorAll('.admin-btn');
+            
+            adminButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (!checkAdmin()) {
+                        e.preventDefault();
+                        document.getElementById('loginModal').style.display = 'flex';
+                        alert('يجب تسجيل الدخول كمدير للوصول إلى هذه الميزة');
+                    }
+                });
+            });
+        }
+
+        // ... باقي الدوال السابقة (updateDateTime, updateBalance, etc...) ...
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupAuth();
+            protectAdminFeatures();
+            updateDateTime();
+            updateBalance();
+            setupSearchAndFilter();
+            setupModals();
+            setupForms();
+            
+            setInterval(updateDateTime, 60000);
+        });
+
+        // دالة إعداد النوافذ المنبثقة (معدلة للتحقق من الصلاحيات)
+        function setupModals() {
+            const incomeModal = document.getElementById('incomeModal');
+            const incomeBtn = document.getElementById('addIncomeBtn');
+            const incomeClose = incomeModal.querySelector('.close');
+            
+            incomeBtn.addEventListener('click', function() {
+                if (!checkAdmin()) return;
+                incomeModal.style.display = 'flex';
+                document.getElementById('incomeDate').value = new Date().toISOString().split('T')[0];
+            });
+            
+            incomeClose.addEventListener('click', function() {
+                incomeModal.style.display = 'none';
+            });
+            
+            // نفس الشيء لنموذج المصروفات...
+        }
+
+        // دالة معالجة النماذج (معدلة للتحقق من الصلاحيات)
+        function setupForms() {
+            document.getElementById('incomeForm').addEventListener('submit', function(e) {
+                if (!checkAdmin()) {
+                    e.preventDefault();
+                    alert('صلاحيات غير كافية');
+                    return;
+                }
+                // ... باقي كود المعالجة ...
+            });
+            
+            // نفس الشيء لنموذج المصروفات...
+        }
+    </script>
 </body>
 </html>

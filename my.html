@@ -1,67 +1,319 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="en">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name=" " content=" ">
-    <title> معلومات عنا </title>
-  
-  
-  </style>
-</head>
-
-<body>
-
-  <div>
-    <dl>
-      <dt>
-      <h1 style="color: rgb(243, 17, 17) ; ">
-      من نحن 
-      </h1>
-      </dt>
-      <dd>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="معلومات عن مركز النور لتعليم القرآن الكريم وعلومه">
+    <title>مركز النور - معلومات عنا</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
         
-      <h3 > *مركز النور* : *مركز لاخراج الناس من ظلام العلم إلى نوره ، ومن تخلف الجهل إلى حضارة الاسلام والعلم.* 
-        <br> 
-    *مركز النور* : هو مركز تعليم خيري يهدف لتعليم القرآن وعلومه وتعلم القراءة والكتابة واعداد جيل واعي متمسك بعقيدته وايمانه في خضم الفتن والاحداث الحاصلة في العالم والمتسارعة لا بد من إعدادنا لشبابنا واجيالنا القادمة إعدادا روحيا عقائديا يجعلهم يفخرون بدينهم وكتابهم ونبيهم وسنتهم وتاريخهم ويسعون لاستعادة مجدهم المسلوب منهم وغرس القيم الأخلاقية والانسانية فيهم والامر بالمعروف والنهي عن المنكر . </h3>
-      </dd>
-    </dl>  
-      
-      
-  </div>
-  <div>
-
-    <h1 style="color: rgb(243, 17, 17) ; ">  متابعة أخبار المركز  </h1>
-
-        <h2> لمتابعة قناة مركز النور على الواتساب
-            <h3> <a href="https://whatsapp.com/channel/0029Vb0w5eP3rZZi1RI0au2l" target="_self" title=" رابط قناة المركز على الواتساب  "> قناة مركز النور على الواتساب   </a> <br></h3>
-
-        </h2>
-        <br>
-        <h2> لمتابعة قناة مركز النور على اليوتيوب 
-            <h3> <a href="https://youtube.com/@user-al-noor99?si=GI_JVdDQkfSBqkrI" target="_self" title=" رابط قناة المركز على يوتيوب  "> قناة مركز النور على اليوتيوب   </a> <br></h3>
-        </h1> <br>
-        <h2> لمتابعة قناة مركز النور على الفيسبوك 
-            <h3> <a href="" target="_self" title=" رابط المركز على فيسبوك  "> قناة مركز النور على الفيسبوك   </a> <br></h3>
-        </h2> <br>
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.8;
+            background-image: url('islamic-pattern.png');
+            background-blend-mode: overlay;
+            background-size: 300px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('islamic-pattern-light.png');
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            color: var(--accent-color);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 25px 0 15px;
+            color: var(--primary-color);
+            position: relative;
+            padding-right: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -5px;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent-color), var(--secondary-color));
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            margin: 15px 0;
+            color: var(--primary-color);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .mission-section {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            border-right: 5px solid var(--accent-color);
+        }
+        
+        .mission-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            text-align: justify;
+        }
+        
+        .social-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .social-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .social-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .social-btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-btn:hover {
+            background-color: #1a252f;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .signature {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-top: 30px;
+        }
+        
+        .signature-img {
+            width: 200px;
+            margin-bottom: 10px;
+        }
+        
+        .signature-text {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .mission-text {
+                font-size: 1rem;
+            }
+            
+            .social-media {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>مركز النور لتعليم القرآن الكريم وعلومه</h1>
+            <h3>نور على نور يهدي الله لنوره من يشاء</h3>
+        </header>
+        
+        <div class="mission-section">
+            <h1>من نحن</h1>
+            <p class="mission-text">
+                مركز النور هو مركز تعليمي خيري يهدف لإخراج الناس من ظلام الجهل إلى نور العلم، ومن تخلف الأمية إلى حضارة الإسلام والعلم. 
+                <br><br>
+                نسعى في مركز النور لتعليم القرآن الكريم وعلومه، وتعلم القراءة والكتابة، وإعداد جيل واعٍ متمسك بعقيدته وإيمانه. في خضم الفتن والأحداث المتسارعة في العالم، نعمل على إعداد شبابنا وأجيالنا القادمة إعداداً روحياً وعقائدياً يجعلهم يفخرون بدينهم وكتابهم ونبيهم وسنتهم وتاريخهم، ويسعون لاستعادة مجدهم المسلوب منهم.
+                <br><br>
+                نحرص على غرس القيم الأخلاقية والإنسانية في نفوس طلابنا، وتعزيز الأمر بالمعروف والنهي عن المنكر، وإعداد جيل قادر على مواجهة التحديات المعاصرة بحكمة وإيمان.
+            </p>
+        </div>
+        
+        <h1>متابعة أخبار المركز</h1>
+        <p>يمكنكم متابعة أخبار المركز وأنشطته عبر منصات التواصل الاجتماعي التالية:</p>
+        
+        <div class="social-media">
+            <div class="social-card">
+                <i class="fab fa-whatsapp social-icon"></i>
+                <h3>قناة الواتساب</h3>
+                <p>اشترك في قناتنا على الواتساب لتلقي آخر الأخبار والتحديثات مباشرة على هاتفك</p>
+                <a href="https://whatsapp.com/channel/0029Vb0w5eP3rZZi1RI0au2l" class="social-btn" target="_blank">
+                    <i class="fas fa-link"></i> الانتقال للقناة
+                </a>
+            </div>
+            
+            <div class="social-card">
+                <i class="fab fa-youtube social-icon"></i>
+                <h3>قناة اليوتيوب</h3>
+                <p>اشترك في قناتنا على يوتيوب لمشاهدة دروسنا وفعالياتنا وأنشطتنا</p>
+                <a href="https://youtube.com/@user-al-noor99?si=GI_JVdDQkfSBqkrI" class="social-btn" target="_blank">
+                    <i class="fas fa-link"></i> الانتقال للقناة
+                </a>
+            </div>
+            
+            <div class="social-card">
+                <i class="fab fa-facebook social-icon"></i>
+                <h3>صفحة الفيسبوك</h3>
+                <p>تابعنا على فيسبوك للتفاعل مع أخبار المركز ومشاركة الفعاليات</p>
+                <a href="#" class="social-btn" target="_blank">
+                    <i class="fas fa-link"></i> الانتقال للصفحة
+                </a>
+            </div>
+        </div>
+        
+        <a href="info.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i> العودة إلى القائمة الرئيسية
+        </a>
+        
+        <div class="footer">
+            <div class="signature">
+                <img src="omar.png" alt="توقيع المهندس عمر النجار" class="signature-img">
+                <p class="signature-text">تصميم وتطوير المهندس عمر النجار</p>
+            </div>
+        </div>
     </div>
-  <a href="info.html" target="_self" title="عودة" > <h3 style="color: darkred;">العودة الى القائمة الرئيسية </h3> </a>
 
-  <footer>
-    <div style="display: grid; justify-items: end;" > <img src="omar.png" class="alte"right-image" width="40%" height="50%"  > </div> 
-  </footer>
-
-<!-- <div style="position: relative; min-height: 10vh;">
-
-    <img src="omar.png" class="alte">
-    <div style="
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 20;
-    padding: 0px; ">  </div>
-</div>
--->
-     
+    <script>
+        // تأثيرات عند التمرير
+        document.addEventListener('DOMContentLoaded', function() {
+            const socialCards = document.querySelectorAll('.social-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = 1;
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            socialCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>
